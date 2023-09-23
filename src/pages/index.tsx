@@ -4,7 +4,10 @@ import Link from "next/link";
 import { api } from "~/utils/api";
 
 export default function Home() {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
+
+  const { data } = api.cards.getAll.useQuery()
+
+  console.log(data)
 
   return (
     <>
@@ -42,9 +45,12 @@ export default function Home() {
               </div>
             </Link>
           </div>
-          <p className="text-2xl text-white">
-            {hello.data ? hello.data.greeting : "Loading tRPC query..."}
-          </p>
+          <div>
+            {data?.map((card) => (<p className="text-2xl text-white">
+              {card.title} - {card.subject} – {card.dueDate.toDateString()} – {card.dueDate.toTimeString()} - {card.submissionLink} - {card.defenceLink} - {card.taskLink}
+            </p>
+            ))}
+          </div>
         </div>
       </main>
     </>
