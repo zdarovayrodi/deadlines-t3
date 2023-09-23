@@ -46,7 +46,7 @@ export default function Home() {
             </Link>
           </div>
           <div>
-            {data?.map((card) => (<p className="text-2xl text-white">
+            {data?.map((card) => (<p className="text-2xl text-white" key={card.id}>
               {card.title} - {card.subject} – {card.dueDate.toDateString()} – {card.dueDate.toTimeString()} - {card.submissionLink} - {card.defenceLink} - {card.taskLink}
             </p>
             ))}
